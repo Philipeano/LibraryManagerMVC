@@ -1,0 +1,43 @@
+﻿@using LibraryManagerMvc.Data.Enums;
+@model LibraryManagerMvc.Data.Entities.Book
+@{
+	ViewData["Title"] = "Add New Book";
+}
+
+<h1>Add New Book</h1>
+<hr />
+
+<p>Fill out this form to add a book to the libary.</p>
+
+<div class="row">
+	<div class="col-md-6">
+		<form method="post">
+			<div class="mb-3">
+				<label asp-for="Title" class="control-label"></label>
+				<input asp-for="Title" class="form-control" />
+				<span asp-validation-for="Title" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Author" class="control-label"></label>
+				<input asp-for="Author" class="form-control" />
+				<span asp-validation-for="Author" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Category" class="control-label"></label>
+				<select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
+				<span asp-validation-for="Category" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="YearPublished" class="control-label"></label>
+				<input asp-for="YearPublished" class="form-control" />
+				<span asp-validation-for="YearPublished" class="text-danger"></span>
+			</div>
+
+			<button class="btn btn-success">Create</button>
+		</form>
+	</div>
+</div>
+
