@@ -1,0 +1,62 @@
+﻿@model BookListViewModel
+@{
+	ViewData["Title"] = "View All Books";
+}
+
+<h1>Available Books</h1>
+<hr />
+
+<p>Below is list of books currently in the libary.</p>
+
+<div class="row">
+	<div class="col-md-6">
+		<form asp-action="List">
+			<div class="mb-3">
+				@*<label asp-for="@Model.SearchTerm" class="control-label"></label>*@
+				<input asp-for="@Model.SearchTerm" class="form-control" />
+				<button type="submit" class="btn btn-default btn-sm">
+					@*<span class="glyphicon glyphicon-search"></span>*@ Search
+				</button>
+			</div>
+		</form>
+
+	</div>
+</div>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>No.</th>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Category</th>
+			<th>Year Published</th>
+		</tr>
+	</thead>
+	<tbody>
+		@{
+			var counter = 0;
+			foreach (var book in Model.Books)
+			{
+				++counter;
+				<tr>
+					<td>@counter</td>
+					<td>@book.Title</td>
+					<td>@book.Author</td>
+					<td>@book.Category</td>
+					<td>@book.YearPublished</td>
+					<td>
+					    <a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id" class="btn btn-success">View</a>
+						<a asp-controller="Books" asp-action="Edit" asp-route-id="@book.Id" class="btn btn-primary">Edit</a>
+						<a asp-controller="Books" asp-action="Delete" asp-route-id="@book.Id" class="btn btn-danger">Delete</a>
+						@*<form method="post" style="display:inline">
+							<button asp-controller="Books" asp-action="Delete" asp-route-id="@book.Id" class="btn btn-danger" onclick="return confirm('Do you really want to delete this book?');">
+								Delete
+							</button>
+						</form>*@
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

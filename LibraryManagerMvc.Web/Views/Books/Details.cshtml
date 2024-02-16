@@ -1,0 +1,45 @@
+﻿@model LibraryManagerMvc.Data.Entities.Book;
+@{
+	ViewData["Title"] = "View Book Details";
+}
+
+<h1>View Book Details</h1>
+<hr />
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">
+				<p>Here is a summary about the book you selected.</p>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">ID:</h5>
+				<p class="card-text">@Model.Id</p>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">Title:</h5>
+				<p class="card-text">@Model.Title</p>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">Author:</h5>
+				<p class="card-text">@Model.Author</p>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">Category:</h5>
+				<p class="card-text">@Model.Category</p>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">Year Published:</h5>
+				<p class="card-text">@Model.YearPublished</p>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">Date Added:</h5>
+				<p class="card-text">@Model.Created.ToString("d MMMM yyyy hh:mm tt")</p>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">Last Updated:</h5>
+				<p class="card-text">@Model.Updated.ToString("d MMMM yyyy hh:mm tt")</p>
+			</div>
+		</div>
+	</div>
+</div>

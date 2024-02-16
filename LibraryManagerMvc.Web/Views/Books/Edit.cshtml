@@ -1,17 +1,19 @@
 ﻿@using LibraryManagerMvc.Data.Enums;
-@model LibraryManagerMvc.Data.Entities.Book
+@model LibraryManagerMvc.Data.Entities.Book;
 @{
-	ViewData["Title"] = "Add New Book";
+	ViewData["Title"] = "Update Book";
 }
 
-<h1>Add New Book</h1>
+<h1>Update Book</h1>
 <hr />
 
-<p>Fill out this form to add a book to the libary.</p>
+<p>Fill out this form to update the selected book with new information.</p>
 
 <div class="row">
 	<div class="col-md-6">
-		<form method="post" >
+		<form method="post">
+			<input style="display:none" asp-for="Id" class="form-control" />
+			<input style="display:none" asp-for="Created" class="form-control" />
 			<div class="mb-3">
 				<label asp-for="Title" class="control-label"></label>
 				<input asp-for="Title" class="form-control" />
@@ -36,8 +38,8 @@
 				<span asp-validation-for="YearPublished" class="text-danger"></span>
 			</div>
 
-			<button class="btn btn-success" asp-action="Create">Create</button>
+			<button class="btn btn-success">Update</button>
+			<a asp-controller="Books" asp-action="ViewAll" class="btn btn-secondary">Cancel</a>
 		</form>
 	</div>
 </div>
-
