@@ -1,8 +1,10 @@
 using LibraryManagerMvc.Data;
+using LibraryManagerMvc.Data.Entities;
 using LibraryManagerMvc.Data.Repositories;
 using LibraryManagerMvc.Web.Extensions;
 using LibraryManagerMvc.Web.Middleware;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,8 @@ builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("LibraryManagerMvcConnStr");
 builder.Services.AddDbContext<LibraryManagerMvcContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<LibraryManagerUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<LibraryManagerMvcContext>();
 
 /* Use any of the 3 service lifetimes to register your user-define services
  *     AddSingleton - Creates one instance of the service and uses it throughout the lifetime of the app, for all requests
@@ -46,6 +50,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "/{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.UseMiddleware<GoodbyeMiddleware>();
 
