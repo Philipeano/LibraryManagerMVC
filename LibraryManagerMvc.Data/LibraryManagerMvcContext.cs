@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagerMvc.Data
 {
-    public class LibraryManagerMvcContext : IdentityDbContext<LibraryManagerUser>
+    public class LibraryManagerMvcContext : IdentityDbContext<LibraryManagerUser, LibraryManagerRole, string>
     {
         public LibraryManagerMvcContext(DbContextOptions<LibraryManagerMvcContext> options) 
             : base(options)

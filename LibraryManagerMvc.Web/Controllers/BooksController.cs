@@ -2,6 +2,7 @@
 using LibraryManagerMvc.Data.Enums;
 using LibraryManagerMvc.Data.Repositories;
 using LibraryManagerMvc.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Versioning;
@@ -9,6 +10,7 @@ using NuGet.Versioning;
 namespace LibraryManagerMvc.Web.Controllers
 {
     // [Route("books/")]
+    [Authorize]
     public class BooksController : Controller
     {
         private readonly IBookRepository _bookRepository;
@@ -19,6 +21,7 @@ namespace LibraryManagerMvc.Web.Controllers
         }
 
         // GET: BooksController
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -62,6 +65,7 @@ namespace LibraryManagerMvc.Web.Controllers
             return View(bookToDisplay);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: BooksController/Create
         [Route("books/create")]
         public ActionResult Create()
@@ -74,6 +78,7 @@ namespace LibraryManagerMvc.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("books/create")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(Book postedBook)
         {
             try
@@ -104,6 +109,7 @@ namespace LibraryManagerMvc.Web.Controllers
         }
 
         // GET: BooksController/Edit/some-guid-value
+        [Authorize(Roles = "Admin")]
         [Route("books/edit/{id}")]
         public ActionResult Edit(Guid id)
         {
@@ -116,6 +122,7 @@ namespace LibraryManagerMvc.Web.Controllers
         }
 
         [HttpPost, Route("books/edit/{id}"), ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Guid id, Book postedBook)
         {
             try
@@ -142,6 +149,7 @@ namespace LibraryManagerMvc.Web.Controllers
         }
 
         // GET: BooksController/Delete/some-guid-value
+        [Authorize(Roles = "Admin")]
         [Route("books/delete/{id}")]
         public ActionResult Delete(Guid id)
         {
@@ -157,6 +165,7 @@ namespace LibraryManagerMvc.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("books/delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult ConfirmDelete(Guid id)
         {
             try

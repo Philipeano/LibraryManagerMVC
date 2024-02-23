@@ -17,6 +17,7 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("LibraryManagerMvcConnStr");
 builder.Services.AddDbContext<LibraryManagerMvcContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDefaultIdentity<LibraryManagerUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<LibraryManagerRole>()
     .AddEntityFrameworkStores<LibraryManagerMvcContext>();
 
 /* Use any of the 3 service lifetimes to register your user-define services
